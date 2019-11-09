@@ -12,6 +12,15 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+
+
+  function displayRealTime() {
+    setInterval(function(){
+        $('#current-time').html(moment().format('hh:mm A'))
+      }, 1000);
+    }
+    displayRealTime();
+
   //SETUP VARIABLES
 //============================================================
 var trnName = ' ';
@@ -25,6 +34,7 @@ var freq    = 0;
 // 1. RETREIVE USER INPTS AND CONVERT TO VARS
 $('#addTrain').on('click', function(e){
     e.preventDefault();
+
     var trnName = $('#trnInput').val().trim();
     var dest    = $('#destInput').val().trim();
     var ftTime  = $('#ftTimeInput').val().trim();
