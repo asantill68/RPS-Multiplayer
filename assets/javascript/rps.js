@@ -22,9 +22,6 @@ var freq    = 0;
 //FUCTIONS
 //============================================================
 
-//MAIN PROCESSES Function calls
-//============================================================
-
 // 1. RETREIVE USER INPTS AND CONVERT TO VARS
 $('#addTrain').on('click', function(e){
     e.preventDefault();
@@ -42,8 +39,33 @@ $('#addTrain').on('click', function(e){
     });
 });
 
-// 2  USE THOSE VARS TO RUN AN AJAZ CALL TO
-// 3. BREAK DOWN THE OBJECT INTO USABLE FIELS
-// 4. DYNAMICALLY GENERATE HTML CONTENT
 
-// 5. DEALING WITH "EDGE CASES" -- BUGS OR SITUATIONS THAT ARE NOT INTUITIVE
+
+// 4. DYNAMICALLY GENERATE HTML CONTENT
+//Firebase Listener that gets all data and loads all members in to tbody-element class=display
+firebase.database().ref().on("child_added", function(snapshot){
+    $(".display").append(snapshot.val().trnName);
+
+});
+
+//Post data on the html
+firebase.database().ref().on("child_added", function(snapshot){
+    $('#name').html(snapshot.val().trnName);
+    $("#dest").html(snapshot.val().dest);
+    $("#freq").html(snapshot.val().freq);
+    // $("#ft").html(snapshot.val().ftTime);
+    // $("#tbd").html(snapshot.val().ftTime);
+});
+
+
+//The orderByChild selects the dateAdded var and limits to limitToLast(1) makes sure the last user added via time
+//  firebase.database().ref().orderByChild("dateAdded").limitToLast(1).on("child_added",function(snapshot){
+//      $("#name").html(snapshot.val().trnName);
+    // $("#emailDisplay").html(snapshot.val().email);
+    // $("#ageDisplay").html(snapshot.val().age);
+    // $("#commentDisplay").html(snapshot.val().comment);
+//  })
+
+
+
+// 5. DEALING WITH "EDGE CASES" -- BUGS OR SITUATIONS THAT ARE NO Intuitive
